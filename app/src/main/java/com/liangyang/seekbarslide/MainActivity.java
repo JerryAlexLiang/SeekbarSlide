@@ -40,8 +40,10 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
             mTextView.setVisibility(View.VISIBLE);//设置TextView可见
             mTextView.setTextColor(Color.WHITE);
             mTextView.setText("完成验证");
+            mSeekBar.setThumb(getResources().getDrawable(R.drawable.pay_success));
         }else {
             mTextView.setVisibility(View.INVISIBLE);//设置TextView不可见
+            mSeekBar.setThumb(getResources().getDrawable(R.drawable.thumb));
         }
 
     }
