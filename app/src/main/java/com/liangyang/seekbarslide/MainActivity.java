@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                 .setIcon(R.drawable.guide_home_on)
                 .setTitle("提示")
                 .setMessage("是否确认登录？")
+                .setCancelable(false)
                 .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
