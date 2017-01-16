@@ -1,6 +1,9 @@
 package com.liangyang.seekbarslide;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,11 +44,51 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
             mTextView.setTextColor(Color.WHITE);
             mTextView.setText("完成验证");
             mSeekBar.setThumb(getResources().getDrawable(R.drawable.pay_success));
+            createDialog();
         }else {
             mTextView.setVisibility(View.INVISIBLE);//设置TextView不可见
             mSeekBar.setThumb(getResources().getDrawable(R.drawable.thumb));
         }
 
+    }
+
+    /**
+     * 创建Dialog
+     */
+    private void createDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                .setIcon(R.drawable.guide_home_on)
+                .setTitle("提示")
+                .setMessage("是否确认登录？")
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        Intent intent = new Intent(MainActivity.this,LoginInActivity.class);
+                        startActivity(intent);
+                        restoreProgress();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        restoreProgress();
+                    }
+                });
+        builder.create().show();
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+
+    }
+
+    /**
+     * 还原ProgressBar
+     */
+    private void restoreProgress() {
+        mSeekBar.setProgress(0);
+        mTextView.setVisibility(View.VISIBLE);
+        mTextView.setTextColor(Color.GRAY);
+        mTextView.setText("请按住滑块拖动到最右边，完成验证！");
+        mSeekBar.setThumb(getResources().getDrawable(R.drawable.thumb));
     }
 
     /**
